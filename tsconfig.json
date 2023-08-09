@@ -21,15 +21,15 @@
       {
         "name": "next"
       }
-    ],
-    "strictNullChecks": true
+    ]
   },
   "include": [
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
+    "**/*.js",
     "**/*.tsx"
-  ],
+, "app/contact/page.tsx"  ],
   "exclude": [
     "node_modules"
   ]

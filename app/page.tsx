@@ -1,17 +1,35 @@
+"use client"; // This is a client component
+import React from 'react';
+import axios from 'axios';
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
-// import Slider from "react-slick";
-// import "slick-carousel/slick/slick.css";
-// import "slick-carousel/slick/slick-theme.css";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
-  //   var settings = {
-  //     dots: true,
-  //     infinite: true,
-  //     speed: 500,
-  //     slidesToShow: 1,
-  //     slidesToScroll: 1,
-  //   };
+
+  const [faqs, setFaqs] = useState([]);
+    useEffect(()=>{
+        axios.get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
+        .then(response => {
+            let result = (response.data && response.data) ? response.data : {};
+            if(result){
+              let faqList = (result.faqs) ? result.faqs : [];
+              console.log(response.data, "faqList");
+              
+              setFaqs (faqList);
+            }
+        })
+    },[])
+    var settings = [{
+      dots: true,
+      infinite: true,
+      speed: 500,
+      slidesToShow: 1,
+      slidesToScroll: 1,
+    }];
   return (
     <main>
       <section className="HometopBg pb-5">
@@ -135,73 +153,73 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="swiper CustomersSaying mt-4 pt-1">
+          <div className="swiper mt-4 pt-1">
             <div className="swiper-wrapper">
               {/* <Slider {...settings}> */}
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
-                </div>
+                <div className="swiper-slide">
+                  <div className="">
+                    <img
+                      className="customerUserProfile"
+                      src="image/demoImg1.png"
+                      alt=""
+                    />
+                  </div>
 
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
+                  <p className="">
+                    It was the best tour ever! I got a lot of impressions of
+                    beautiful places and breathtaking views.
+                  </p>
+                  <h3>Liam Gordon</h3>
+                  <h6 className="">Austin, TX</h6>
                 </div>
+                <div className="swiper-slide">
+                  <div className="">
+                    <img
+                      className="customerUserProfile"
+                      src="image/demoImg1.png"
+                      alt=""
+                    />
+                  </div>
 
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
+                  <p className="">
+                    It was the best tour ever! I got a lot of impressions of
+                    beautiful places and breathtaking views.
+                  </p>
+                  <h3>Liam Gordon</h3>
+                  <h6 className="">Austin, TX</h6>
                 </div>
+                <div className="swiper-slide">
+                  <div className="">
+                    <img
+                      className="customerUserProfile"
+                      src="image/demoImg1.png"
+                      alt=""
+                    />
+                  </div>
 
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
+                  <p className="">
+                    It was the best tour ever! I got a lot of impressions of
+                    beautiful places and breathtaking views.
+                  </p>
+                  <h3>Liam Gordon</h3>
+                  <h6 className="">Austin, TX</h6>
                 </div>
+                <div className="swiper-slide">
+                  <div className="">
+                    <img
+                      className="customerUserProfile"
+                      src="image/demoImg1.png"
+                      alt=""
+                    />
+                  </div>
 
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
+                  <p className="">
+                    It was the best tour ever! I got a lot of impressions of
+                    beautiful places and breathtaking views.
+                  </p>
+                  <h3>Liam Gordon</h3>
+                  <h6 className="">Austin, TX</h6>
+                </div>
               {/* </Slider> */}
             </div>
           </div>
@@ -456,343 +474,37 @@ export default function Home() {
           <h1>Frequltly Asked Questions</h1>
           <div className="col-lg-10 mx-auto mt-md-4">
             <div className="accordion" id="accordionExample">
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingOne">
+              {faqs.map((records,index)=>{
+                return <div className="accordion-item" key={index}>
+                <h2 className="accordion-header" id={"heading"+index}>
                   <button
                     className="accordion-button"
                     type="button"
                     data-bs-toggle="collapse"
-                    data-bs-target="#collapseOne"
+                    data-bs-target={"#collapse"+index}
                     aria-expanded="true"
-                    aria-controls="collapseOne"
+                    aria-controls={"collapse"+index}
                   >
-                    <span className="frequltyNumber">1.</span>How can a
-                    pomegranate tree image benefit my business?
+                    <span className="frequltyNumber">{index+1}.</span>{records.question}
                   </button>
                 </h2>
                 <div
-                  id="collapseOne"
-                  className="accordion-collapse collapse show"
-                  aria-labelledby="headingOne"
+                  id={"collapse"+index}
+                  className={"accordion-collapse collapse"+ (index == 0) ? 'show' :''}
+                  aria-labelledby={"heading"+index}
                   data-bs-parent="#accordionExample"
                 >
                   <div className="accordion-body">
                     <div className="row align-items-center">
                       <div className="col-lg-12">
-                        <p className="mb-3">
-                          The pomegranate tree image symbolizes prosperity and
-                          abundance, creating a positive ambiance that can
-                          attract success, stimulate creativity, and enhance
-                          productivity in your business.
+                        <p className="mb-3" dangerouslySetInnerHTML={{__html: records.faq_ans}}>
                         </p>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingTwo">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTwo"
-                    aria-expanded="false"
-                    aria-controls="collapseTwo"
-                  >
-                    <span className="frequltyNumber">2.</span> Will this image
-                    increase my financial gains?
-                  </button>
-                </h2>
-                <div
-                  id="collapseTwo"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingTwo"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          Yes, embracing the pomegranate tree image can help
-                          amplify financial prosperity, attracting opportunities
-                          and clients to boost your business growth.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingThree">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseThree"
-                    aria-expanded="false"
-                    aria-controls="collapseThree"
-                  >
-                    <span className="frequltyNumber">3.</span> Can the
-                    pomegranate tree image improve team collaboration?
-                  </button>
-                </h2>
-                <div
-                  id="collapseThree"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingThree"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          Absolutely! The image's symbolism of unity and harmony
-                          can foster a sense of teamwork among your associates,
-                          encouraging collaboration and cooperation.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingFour">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFour"
-                    aria-expanded="false"
-                    aria-controls="collapseFour"
-                  >
-                    <span className="frequltyNumber">3.</span> How will this
-                    image affect decision-making in my business?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFour"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingFour"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          By embracing the pomegranate tree image, you can gain
-                          clarity and wisdom in your decision-making process,
-                          helping you make informed choices for your business
-                          strategies.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingFive">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseFive"
-                    aria-expanded="false"
-                    aria-controls="collapseFive"
-                  >
-                    <span className="frequltyNumber">5.</span> Is there a
-                    specific place where I should display the image for maximum
-                    impact?
-                  </button>
-                </h2>
-                <div
-                  id="collapseFive"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingFour"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          You can place the pomegranate tree image in a
-                          prominent location in your home or office, such as the
-                          main entrance, workspace, or any area where you seek
-                          inspiration and motivation.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingSix">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseSix"
-                    aria-expanded="false"
-                    aria-controls="collapseSix"
-                  >
-                    <span className="frequltyNumber">6.</span>Can the
-                    pomegranate tree image help me cope with business
-                    challenges?
-                  </button>
-                </h2>
-                <div
-                  id="collapseSix"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingSix"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          Yes, the image's representation of resilience can
-                          inspire you to overcome obstacles and remain strong in
-                          the face of challenges, guiding you towards success.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingSeven">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseSeven"
-                    aria-expanded="false"
-                    aria-controls="collapseSeven"
-                  >
-                    <span className="frequltyNumber">7.</span> How can this
-                    image attract more clients and customers?
-                  </button>
-                </h2>
-                <div
-                  id="collapseSeven"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingSeven"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          The pomegranate tree image's captivating aura can draw
-                          attention and positive energy, attracting potential
-                          clients and customers to your business.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingEight">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseEight"
-                    aria-expanded="false"
-                    aria-controls="collapseEight"
-                  >
-                    <span className="frequltyNumber">8.</span> Will this image
-                    help in enhancing creativity?
-                  </button>
-                </h2>
-                <div
-                  id="collapseEight"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingEight"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          Indeed! The enchanting imagery of the pomegranate tree
-                          can spark your creativity and inspire innovative ideas
-                          for your business ventures.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingNine">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseNine"
-                    aria-expanded="false"
-                    aria-controls="collapseNine"
-                  >
-                    <span className="frequltyNumber">9.</span> Can I experience
-                    a change in my business mindset with this image?
-                  </button>
-                </h2>
-                <div
-                  id="collapseNine"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingNine"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          Embracing the pomegranate tree image can lead to a
-                          positive mindset shift, motivating you to think more
-                          optimistically about your business growth and success.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="accordion-item">
-                <h2 className="accordion-header" id="headingTen">
-                  <button
-                    className="accordion-button collapsed"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#collapseTen"
-                    aria-expanded="false"
-                    aria-controls="collapseTen"
-                  >
-                    <span className="frequltyNumber">10.</span> How soon can I
-                    expect to see results after placing the pomegranate tree
-                    image?
-                  </button>
-                </h2>
-                <div
-                  id="collapseTen"
-                  className="accordion-collapse collapse"
-                  aria-labelledby="headingTen"
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3">
-                          The impact may vary from person to person, but many
-                          customers have reported experiencing positive changes
-                          in their business endeavors shortly after
-                          incorporating the image into their environment.
-                        </p>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              })}
             </div>
           </div>
         </div>

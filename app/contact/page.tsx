@@ -18,12 +18,11 @@ export default function Contact() {
             "Content-Type": "application/json",
             Accept: "application/json",
           },
-          // mode: "no-cors",
           body: json,
         }
       );
       const result = await response.json();
-
+      console.log(result);
       if (result.success) {
         console.log(result);
       }
