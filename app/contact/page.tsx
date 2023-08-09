@@ -1,8 +1,48 @@
 "use client";
 
-import { Formik } from "formik";
+import { Formik, FormikHelpers, FormikValues, useFormik } from "formik";
 
 export default function Contact() {
+  async function handleSubmit(
+    values: FormikValues,
+    helper: FormikHelpers<FormikValues>
+  ) {
+    const formData = new FormData();
+    console.log("form Data", formData);
+    formData.append("access_key", "2ed8c5dd-4de1-4ac8-9406-39500036e7af");
+
+    formData.append("firstName", values.firstName);
+    formData.append("lastName", values.lastName);
+    formData.append("phoneNumber", values.phoneNumber);
+    formData.append("email", values.email);
+    formData.append("message", values.message);
+    // formData.append("values", values);
+
+    const object = Object.fromEntries(formData);
+    const json = JSON.stringify(object);
+
+    helper.setSubmitting(true);
+    try {
+      const response = await fetch("https://api.web3forms.com/submit", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+        body: json,
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        console.log(result);
+      }
+      helper.setSubmitting(false);
+      helper.resetForm();
+    } catch (error) {
+      helper.setSubmitting(false);
+      console.log(error);
+    }
+  }
   return (
     <main>
       <div className="productBannerTop">
@@ -90,11 +130,9 @@ export default function Contact() {
                 }
                 return errors;
               }}
-              onSubmit={(values, { setSubmitting }) => {
-                setTimeout(() => {
-                  alert(JSON.stringify(values, null, 2));
-                  setSubmitting(false);
-                }, 400);
+              onSubmit={(values, helper) => {
+                console.log("form ", values);
+                handleSubmit(values, helper);
               }}
             >
               {({
