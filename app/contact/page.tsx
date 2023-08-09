@@ -7,30 +7,20 @@ export default function Contact() {
     values: FormikValues,
     helper: FormikHelpers<FormikValues>
   ) {
-    const formData = new FormData();
-    console.log("form Data", formData);
-    formData.append("access_key", "2ed8c5dd-4de1-4ac8-9406-39500036e7af");
-
-    formData.append("firstName", values.firstName);
-    formData.append("lastName", values.lastName);
-    formData.append("phoneNumber", values.phoneNumber);
-    formData.append("email", values.email);
-    formData.append("message", values.message);
-    // formData.append("values", values);
-
-    const object = Object.fromEntries(formData);
-    const json = JSON.stringify(object);
-
+    const json = JSON.stringify(values);
     helper.setSubmitting(true);
     try {
-      const response = await fetch("https://api.web3forms.com/submit", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: json,
-      });
+      const response = await fetch(
+        "https://samriddhi-frame-z0nw.onrender.com/api/contact_us",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: json,
+        }
+      );
       const result = await response.json();
 
       if (result.success) {
@@ -97,32 +87,32 @@ export default function Contact() {
             </h1>
             <Formik
               initialValues={{
-                firstName: "",
-                lastName: "",
-                phoneNumber: "",
+                name: "",
+                city: "",
+                phone: "",
                 email: "",
                 message: "",
               }}
               validate={(values) => {
                 const errors: any = {};
-                if (!values.firstName) {
-                  errors.firstName = "Required";
+                if (!values.name) {
+                  errors.name = "Name cannot be blank";
                 }
-                if (!values.lastName) {
-                  errors.lastName = "Required";
+                if (!values.city) {
+                  errors.city = "City cannot be blank";
                 }
-                if (!values.phoneNumber) {
-                  errors.phoneNumber = "Required";
-                } else if (values.phoneNumber.length < 8) {
-                  errors.phoneNumber = "At least 8 digits are required";
+                if (!values.phone) {
+                  errors.phone = "Phone number cannot be blank";
+                } else if (values.phone.length < 8) {
+                  errors.phone = "At least 8 digits are required";
                 }
 
                 if (!values.message) {
-                  errors.message = "Required";
+                  errors.message = "Name cannot be blank";
                 }
 
                 if (!values.email) {
-                  errors.email = "Required";
+                  errors.email = "Email cannot be blank";
                 } else if (
                   !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(values.email)
                 ) {
@@ -131,7 +121,6 @@ export default function Contact() {
                 return errors;
               }}
               onSubmit={(values, helper) => {
-                console.log("form ", values);
                 handleSubmit(values, helper);
               }}
             >
@@ -152,77 +141,20 @@ export default function Contact() {
                       <div className="form-floating billingForm">
                         <input
                           type="text"
-                          name="firstName"
+                          name="name"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.firstName}
+                          value={values.name}
                           className="form-control"
-                          id="floatingfirstName"
+                          id="floatingname"
                           placeholder="First Name"
                         />
-                        <label htmlFor="floatingfirstName">
-                          Fisrt name<span className="text-danger">*</span>
+                        <label htmlFor="floatingname">
+                          Name<span className="text-danger">*</span>
                         </label>
                       </div>
                       <span style={{ color: "red", fontSize: "12px" }}>
-                        {errors.firstName &&
-                          touched.firstName &&
-                          errors.firstName}
-                      </span>
-                    </div>
-                    <div className="col-lg-6 col-md-6">
-                      <div className="form-floating billingForm">
-                        <input
-                          type="text"
-                          name="lastName"
-                          onChange={handleChange}
-                          onBlur={handleBlur}
-                          value={values.lastName}
-                          className="form-control"
-                          placeholder="Last Name"
-                          id="floatingLastName"
-                        />
-                        <label htmlFor="floatingLastName">
-                          Last name<span className="text-danger">*</span>
-                        </label>
-                      </div>
-                      <span style={{ color: "red", fontSize: "12px" }}>
-                        {errors.lastName && touched.lastName && errors.lastName}
-                      </span>
-                    </div>
-
-                    <div className="col-lg-6 col-md-6">
-                      <div className="form-floating billingForm">
-                        <input
-                          type="text"
-                          name="phoneNumber"
-                          maxLength={12}
-                          onChange={(e) => {
-                            const regex = /^[0-9\b]+$/;
-                            if (
-                              e.currentTarget.value === "" ||
-                              regex.test(e.currentTarget.value)
-                            ) {
-                              setFieldValue(
-                                "phoneNumber",
-                                e.currentTarget.value
-                              );
-                            }
-                          }}
-                          onBlur={handleBlur}
-                          value={values.phoneNumber}
-                          className="form-control"
-                          placeholder="Phone Number"
-                          id="floatingNumber"
-                        />
-                        <label htmlFor="floatingNumber">
-                          Phone number<span className="text-danger">*</span>
-                        </label>
-                      </div>
-                      <span style={{ color: "red", fontSize: "12px" }}>
-                        {errors.phoneNumber &&
-                          touched.phoneNumber &&
-                          errors.phoneNumber}
+                        {errors.name && touched.name && errors.name}
                       </span>
                     </div>
                     <div className="col-lg-6 col-md-6">
@@ -245,7 +177,55 @@ export default function Contact() {
                         {errors.email && touched.email && errors.email}
                       </span>
                     </div>
-
+                    <div className="col-lg-6 col-md-6">
+                      <div className="form-floating billingForm">
+                        <input
+                          type="text"
+                          name="phone"
+                          maxLength={12}
+                          onChange={(e) => {
+                            const regex = /^[0-9\b]+$/;
+                            if (
+                              e.currentTarget.value === "" ||
+                              regex.test(e.currentTarget.value)
+                            ) {
+                              setFieldValue("phone", e.currentTarget.value);
+                            }
+                          }}
+                          onBlur={handleBlur}
+                          value={values.phone}
+                          className="form-control"
+                          placeholder="Phone Number"
+                          id="floatingNumber"
+                        />
+                        <label htmlFor="floatingNumber">
+                          Phone number<span className="text-danger">*</span>
+                        </label>
+                      </div>
+                      <span style={{ color: "red", fontSize: "12px" }}>
+                        {errors.phone && touched.phone && errors.phone}
+                      </span>
+                    </div>
+                    <div className="col-lg-6 col-md-6">
+                      <div className="form-floating billingForm">
+                        <input
+                          type="text"
+                          name="city"
+                          onChange={handleChange}
+                          onBlur={handleBlur}
+                          value={values.city}
+                          className="form-control"
+                          placeholder="Last Name"
+                          id="floatingcity"
+                        />
+                        <label htmlFor="floatingcity">
+                          City<span className="text-danger">*</span>
+                        </label>
+                      </div>
+                      <span style={{ color: "red", fontSize: "12px" }}>
+                        {errors.city && touched.city && errors.city}
+                      </span>
+                    </div>
                     <div className="col-lg-12">
                       <div className="form-floating billingForm">
                         <textarea
