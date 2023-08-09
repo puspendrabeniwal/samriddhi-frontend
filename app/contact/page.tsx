@@ -73,7 +73,10 @@ export default function Contact() {
                 }
                 if (!values.phoneNumber) {
                   errors.phoneNumber = "Required";
+                } else if (values.phoneNumber.length < 8) {
+                  errors.phoneNumber = "At least 8 digits are required";
                 }
+
                 if (!values.message) {
                   errors.message = "Required";
                 }
@@ -102,6 +105,7 @@ export default function Contact() {
                 handleBlur,
                 handleSubmit,
                 isSubmitting,
+                setFieldValue,
                 /* and other goodies */
               }) => (
                 <form onSubmit={handleSubmit}>
@@ -152,9 +156,21 @@ export default function Contact() {
                     <div className="col-lg-6 col-md-6">
                       <div className="form-floating billingForm">
                         <input
-                          type="number"
+                          type="text"
                           name="phoneNumber"
-                          onChange={handleChange}
+                          maxLength={12}
+                          onChange={(e) => {
+                            const regex = /^[0-9\b]+$/;
+                            if (
+                              e.currentTarget.value === "" ||
+                              regex.test(e.currentTarget.value)
+                            ) {
+                              setFieldValue(
+                                "phoneNumber",
+                                e.currentTarget.value
+                              );
+                            }
+                          }}
                           onBlur={handleBlur}
                           value={values.phoneNumber}
                           className="form-control"
@@ -175,10 +191,10 @@ export default function Contact() {
                       <div className="form-floating billingForm">
                         <input
                           type="email"
-                          name="phoneNumber"
+                          name="email"
                           onChange={handleChange}
                           onBlur={handleBlur}
-                          value={values.phoneNumber}
+                          value={values.email}
                           className="form-control"
                           placeholder="Email"
                           id="floatingemail"
