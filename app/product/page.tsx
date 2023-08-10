@@ -1,27 +1,28 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import React from 'react';
 import axios from "axios";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+
 export default function Product() {
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
-    getProductList();
+    axios
+    .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
+    .then(
+      (res) => {
+        const dt = (res.data.result) ? res.data.result : [];
+        setproductsItems(dt);
+        console.log(productsItems,"productsItems")
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   }, []);
-  //==== Product list by api =======
-  const getProductList = async () => {
-    await axios
-      .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
-      .then(
-        (res) => {
-          const dt = (res.data.result) ? res.data.result : [];
-          setproductsItems(dt);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
-  };
+
+
   return (
     <main>
       <section className="defaultPaddingTB bg-lightYellow">
@@ -73,7 +74,7 @@ export default function Product() {
               </Link>
             </div>
             
-            })};
+            })}
             </div>
           </div>
         </div>

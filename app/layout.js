@@ -22,13 +22,13 @@ export default function RootLayout({
         <meta name="keywords" />
         <title>Home</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-        <link rel="icon" href="img/rkInputIcon.png" />
-        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" type="text/css" href="css/style.css" />
-        <link rel="stylesheet" type="text/css" href="css/common.css" />
-        <link rel="stylesheet" type="text/css" href="css/responsive.css" />
-        <link rel="stylesheet" href="css/animate.css" />
-        <link rel="stylesheet" type="text/css" href="css/swiper-bundle.min.css"></link>
+        <link rel="icon" href="/img/rkInputIcon.png" />
+        <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" type="text/css" href="/css/style.css" />
+        <link rel="stylesheet" type="text/css" href="/css/common.css" />
+        <link rel="stylesheet" type="text/css" href="/css/responsive.css" />
+        <link rel="stylesheet" href="/css/animate.css" />
+        <link rel="stylesheet" type="text/css" href="/css/swiper-bundle.min.css"></link>
       </head>
       <body className={inter.className}>
         <Header/>
@@ -36,13 +36,13 @@ export default function RootLayout({
         <Footer/>
       </body>
 
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/jquery.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/bootstrap.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/particles.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/swiper-bundle.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/custom.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/mobile-nav.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="js/wow.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/jquery.min.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/bootstrap.min.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/particles.min.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/swiper-bundle.min.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/custom.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/mobile-nav.js"></Script>
+      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/wow.js"></Script>
     </html>
   )
 }

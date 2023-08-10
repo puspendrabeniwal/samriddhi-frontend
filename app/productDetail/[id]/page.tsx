@@ -1,9 +1,9 @@
 "use client";
-
+import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
-export default function Product({ params  }: { params : { id: string } }) {
+export default function ProductDetail({ params  }: { params : { id: string } }) {
   let productKeys = {
     "full_image_path" : "", 
     "product_name" : "", 
@@ -108,14 +108,8 @@ export default function Product({ params  }: { params : { id: string } }) {
 
                         <p className="productDec mt-md-4 mt-3">{productDetail?.description}
                         </p>
-
-                        <input type="number" className="countNumber form-control mt-4" />
-
-
                         <div className="mt-4 pt-2">
-                            <button className="btn btn-white me-3 px-3"><i className="fa fa-user-o me-1" aria-hidden="true"></i>
-                                Add to cart</button>
-                            <button className="btn btn-yellow">Buy Now</button>
+                            <Link href={`/checkout/${params.id}`} className="btn btn-yellow">Buy Now</Link>
                         </div>
                     </div>
                 </div>
