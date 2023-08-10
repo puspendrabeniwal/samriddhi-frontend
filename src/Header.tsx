@@ -51,7 +51,7 @@ export function Header() {
               </Link>
             </li>
             <li className="">
-              <Link className="scrollLink" href="contact">
+              <Link className="scrollLink" href="/contact">
                 Contact
               </Link>
             </li>

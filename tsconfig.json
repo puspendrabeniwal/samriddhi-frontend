@@ -28,8 +28,10 @@
     ".next/types/**/*.ts",
     "**/*.ts",
     "**/*.js",
-    "**/*.tsx"
-, "app/contact/page.tsx"  ],
+    "**/*.tsx",
+    "app/contact/page.tsx",
+    "build/types/**/*.ts"
+  ],
   "exclude": [
     "node_modules"
   ]
