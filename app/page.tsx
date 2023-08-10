@@ -1,6 +1,6 @@
 "use client"; // This is a client component
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
@@ -9,27 +9,29 @@ import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 
 export default function Home() {
-
   const [faqs, setFaqs] = useState([]);
-    useEffect(()=>{
-        axios.get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
-        .then(response => {
-            let result = (response.data && response.data) ? response.data : {};
-            if(result){
-              let faqList = (result.faqs) ? result.faqs : [];
-              console.log(response.data, "faqList");
-              
-              setFaqs (faqList);
-            }
-        })
-    },[])
-    var settings = [{
+  useEffect(() => {
+    axios
+      .get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
+      .then((response) => {
+        let result = response.data && response.data ? response.data : {};
+        if (result) {
+          let faqList = result.faqs ? result.faqs : [];
+          console.log(response.data, "faqList");
+
+          setFaqs(faqList);
+        }
+      });
+  }, []);
+  var settings = [
+    {
       dots: true,
       infinite: true,
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1,
-    }];
+    },
+  ];
   return (
     <main>
       <section className="HometopBg pb-5">
@@ -155,72 +157,66 @@ export default function Home() {
 
           <div className="swiper mt-4 pt-1">
             <div className="swiper-wrapper">
-              {/* <Slider {...settings}> */}
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
+              <div className="swiper-slide">
+                <div className="">
+                  <img
+                    className="customerUserProfile"
+                    src="image/2nd-Image.png"
+                    alt=""
+                  />
                 </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Liam Gordon</h3>
+                <h6 className="">Austin, TX</h6>
+              </div>
+              <div className="swiper-slide">
+                <div className="">
+                  <img
+                    className="customerUserProfile"
+                    src="image/demoImg1.png"
+                    alt=""
+                  />
                 </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Liam Gordon</h3>
+                <h6 className="">Austin, TX</h6>
+              </div>
+              <div className="swiper-slide">
+                <div className="">
+                  <img
+                    className="customerUserProfile"
+                    src="image/demoImg1.png"
+                    alt=""
+                  />
                 </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Liam Gordon</h3>
+                <h6 className="">Austin, TX</h6>
+              </div>
+              <div className="swiper-slide">
+                <div className="">
+                  <img
+                    className="customerUserProfile"
+                    src="image/demoImg1.png"
+                    alt=""
+                  />
                 </div>
-              {/* </Slider> */}
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Liam Gordon</h3>
+                <h6 className="">Austin, TX</h6>
+              </div>
             </div>
           </div>
         </div>
@@ -474,36 +470,47 @@ export default function Home() {
           <h1>Frequltly Asked Questions</h1>
           <div className="col-lg-10 mx-auto mt-md-4">
             <div className="accordion" id="accordionExample">
-              {faqs.map((records,index)=>{
-                return <div className="accordion-item" key={index}>
-                <h2 className="accordion-header" id={"heading"+index}>
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={"#collapse"+index}
-                    aria-expanded="true"
-                    aria-controls={"collapse"+index}
-                  >
-                    <span className="frequltyNumber">{index+1}.</span>{records.question}
-                  </button>
-                </h2>
-                <div
-                  id={"collapse"+index}
-                  className={"accordion-collapse collapse"+ (index == 0) ? 'show' :''}
-                  aria-labelledby={"heading"+index}
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3" dangerouslySetInnerHTML={{__html: records.faq_ans}}>
-                        </p>
+              {faqs.map((records, index) => {
+                return (
+                  <div className="accordion-item" key={index}>
+                    <h2 className="accordion-header" id={"heading" + index}>
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={"#collapse" + index}
+                        aria-expanded="true"
+                        aria-controls={"collapse" + index}
+                      >
+                        <span className="frequltyNumber">{index + 1}.</span>
+                        {records.question}
+                      </button>
+                    </h2>
+                    <div
+                      id={"collapse" + index}
+                      className={
+                        "accordion-collapse collapse" + (index == 0)
+                          ? "show"
+                          : ""
+                      }
+                      aria-labelledby={"heading" + index}
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div className="accordion-body">
+                        <div className="row align-items-center">
+                          <div className="col-lg-12">
+                            <p
+                              className="mb-3"
+                              dangerouslySetInnerHTML={{
+                                __html: records.faq_ans,
+                              }}
+                            ></p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
               })}
             </div>
           </div>

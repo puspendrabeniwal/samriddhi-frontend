@@ -14,7 +14,7 @@ export default function Product() {
       .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
       .then(
         (res) => {
-          const dt = (res.data.result) ? res.data.result : [];
+          const dt = res.data.result ? res.data.result : [];
           setproductsItems(dt);
         },
         (err) => {
@@ -30,50 +30,51 @@ export default function Product() {
             <h2 className="KumbhSans-Bold">Our Product</h2>
 
             <div className="row">
-                            
-            {productsItems.map((records,index)=>{
-              return     <div className="col-lg-4 Our_Product mt-3" key={index}>
-                <Link href={"/productDetail/"+records._id}>
-              <div className="bg-white text-center p-3 productImg">
-                <img
-                  src={records?.full_image_path}
-                  className=""
-                  alt="product image"
-                />
-              </div>
-              <div className="mt-3">
- 
-                <div className="ps-xl-3">
-                  <h2> {records?.product_name}</h2>
+              {productsItems.map((records, index) => {
+                return (
+                  <div className="col-lg-4 Our_Product mt-3" key={index}>
+                    <Link href={"/productDetail/" + records._id}>
+                      <div className="bg-white text-center p-3 productImg">
+                        <img
+                          src={records?.full_image_path}
+                          className=""
+                          alt="product image"
+                        />
+                      </div>
+                      <div className="mt-3">
+                        <div className="ps-xl-3">
+                          <h2> {records?.product_name}</h2>
 
-                  <h3 className="KumbhSans-Bold mt-2">
-                    <span className="yellow-color">Rs. {records?.discount_price}</span>{" "}
-                    <del className="ms-3">Rs. {records?.price}</del>
-                  </h3>
-                  <div className="mt-2 text-center" >
-                    <a href="">
-                      <i className="fa fa-star ratingStar"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-star ratingStar"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-star ratingStar"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-star ratingStar"></i>
-                    </a>
-                    <a href="">
-                      <i className="fa fa-star ratingStar"></i>
-                    </a>
+                          <h3 className="KumbhSans-Bold mt-2">
+                            <span className="yellow-color">
+                              Rs. {records?.discount_price}
+                            </span>{" "}
+                            <del className="ms-3">Rs. {records?.price}</del>
+                          </h3>
+                          <div className="mt-2 text-center">
+                            <a href="">
+                              <i className="fa fa-star ratingStar"></i>
+                            </a>
+                            <a href="">
+                              <i className="fa fa-star ratingStar"></i>
+                            </a>
+                            <a href="">
+                              <i className="fa fa-star ratingStar"></i>
+                            </a>
+                            <a href="">
+                              <i className="fa fa-star ratingStar"></i>
+                            </a>
+                            <a href="">
+                              <i className="fa fa-star ratingStar"></i>
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
                   </div>
-                </div>
-
-              </div>
-              </Link>
-            </div>
-            
-            })};
+                );
+              })}
+              ;
             </div>
           </div>
         </div>
