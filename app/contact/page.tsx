@@ -1,32 +1,23 @@
 "use client";
-
+import React, { useRef } from "react";
+import axios from "axios";
 import { Formik, FormikHelpers, FormikValues, useFormik } from "formik";
+import { Toast } from "primereact/toast";
+// import { useRef } from "react";
 
 export default function Contact() {
+  const toast = useRef(null);
   async function handleSubmit(
     values: FormikValues,
     helper: FormikHelpers<FormikValues>
   ) {
-    const json = JSON.stringify(values);
     helper.setSubmitting(true);
     try {
-      const response = await fetch(
+      const response = await axios.post(
         "https://samriddhi-frame-z0nw.onrender.com/api/contact_us",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-            Accept: "application/json",
-          },
-          // mode: "no-cors",
-          body: json,
-        }
+        values
       );
-      const result = await response.json();
-
-      if (result.success) {
-        console.log(result);
-      }
+      console.log("console", response);
       helper.setSubmitting(false);
       helper.resetForm();
     } catch (error) {
@@ -34,8 +25,18 @@ export default function Contact() {
       console.log(error);
     }
   }
+  // const showSuccess = () => {
+  //   toast.current.show({
+  //     severity: "success",
+  //     summary: "Success Message",
+  //     detail: "Message Content",
+  //     life: 3000,
+  //   });
+  // };
+
   return (
     <main>
+      <Toast ref={toast} />
       <div className="productBannerTop">
         <h1>Contact Us</h1>
       </div>
