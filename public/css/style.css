@@ -42,7 +42,7 @@ Navigation Menu
 .modal{z-index: 33335}
 .logo-top{height: 60px;}
 .headerNav {height: 70px;z-index: 999;transition: all 0.9s;display: flex;align-items: center;}
-.navbarScroll{position: sticky;z-index: 2222;top: 0px;background-color: var(--yellowLightColor);}
+.navbarScroll{position: sticky;z-index: 999;top: 0px;background-color: var(--yellowLightColor);}
 .fixedHeader{background-color: var(--yellowLightColor);box-shadow: 0px 0px 5px rgba(127, 137, 161, 0.3);}
 /*-------------------------------------------------------------- # 
 maintop sliders
@@ -253,6 +253,7 @@ maintop sliders
 .contactAddress img{ width: 48px; } 
 .contactAddress h6{ font-size: 15px; margin-top: 8px; font-family: Gilroy-Light; line-height: 20px; } 
 .contactAddress h5{ font-size: 19px; font-family: Gilroy-Bold; }
+
 
 
 .our-mission-panel h2{

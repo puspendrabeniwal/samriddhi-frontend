@@ -1,35 +1,109 @@
 "use client"; // This is a client component
-import React from 'react';
-import axios from 'axios';
+import React from "react";
+import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Carousel } from "primereact/carousel";
+import { AppConstants } from "./constants/constants";
 
 export default function Home() {
-
   const [faqs, setFaqs] = useState([]);
-    useEffect(()=>{
-        axios.get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
-        .then(response => {
-            let result = (response.data && response.data) ? response.data : {};
-            if(result){
-              let faqList = (result.faqs) ? result.faqs : [];
-              console.log(response.data, "faqList");
-              
-              setFaqs (faqList);
-            }
-        })
-    },[])
-    var settings = [{
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    }];
+  const [productsItems, setproductsItems] = useState([]);
+  useEffect(() => {
+    getProductList();
+  }, []);
+  const responsiveOptions = [
+    {
+      breakpoint: "1199px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "991px",
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "767px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+  const listOfCarouselProduct = [
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+  ];
+  useEffect(() => {
+    axios.get(`${AppConstants.Api_BaseUrl}/home_data`).then((response) => {
+      let result = response.data && response.data ? response.data : {};
+      if (result) {
+        let faqList = result.faqs ? result.faqs : [];
+        setFaqs(faqList);
+      }
+    });
+  }, []);
+
+  const productTemplate = (
+    carouselProduct: (typeof listOfCarouselProduct)[0]
+  ) => {
+    return (
+      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+        <div className="mb-3">
+          <img
+            width={200}
+            className="customerUserProfile"
+            src={carouselProduct.imgUrl}
+            alt={carouselProduct.name}
+          />
+        </div>
+        <div>
+          <p className="">{carouselProduct.description}</p>
+          <h3>{carouselProduct.name}</h3>
+          <h6 className="">{carouselProduct.place}</h6>
+        </div>
+      </div>
+    );
+  };
+
+  //==== Product list by api =======
+  const getProductList = async () => {
+    await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
+      (res) => {
+        const dt = res.data.result ? res.data.result : [];
+        setproductsItems(dt);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
   return (
     <main>
       <section className="HometopBg pb-5">
@@ -152,77 +226,13 @@ export default function Home() {
               Samriddhi Frames.
             </p>
           </div>
-
-          <div className="swiper mt-4 pt-1">
-            <div className="swiper-wrapper">
-              {/* <Slider {...settings}> */}
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
-                </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
-                </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
-                </div>
-                <div className="swiper-slide">
-                  <div className="">
-                    <img
-                      className="customerUserProfile"
-                      src="image/demoImg1.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <p className="">
-                    It was the best tour ever! I got a lot of impressions of
-                    beautiful places and breathtaking views.
-                  </p>
-                  <h3>Liam Gordon</h3>
-                  <h6 className="">Austin, TX</h6>
-                </div>
-              {/* </Slider> */}
-            </div>
-          </div>
+          <Carousel
+            value={listOfCarouselProduct}
+            numScroll={1}
+            numVisible={3}
+            responsiveOptions={responsiveOptions}
+            itemTemplate={productTemplate}
+          />
         </div>
       </section>
       <section className="marqueeNew">
@@ -247,199 +257,52 @@ export default function Home() {
               guarantee, and wide range of sizes.
             </p>
           </div>
+          <div className="row">
+            {productsItems.map((records: any, index) => {
+              return (
+                <div className="col-lg-4 Our_Product mt-3" key={index}>
+                  <Link href={"/productDetail/" + records?._id}>
+                    <div className="bg-white text-center p-3 productImg">
+                      <img
+                        src={records.full_image_path}
+                        className=""
+                        alt="product image"
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <div className="ps-xl-3">
+                        <h2> {records?.product_name}</h2>
 
-          <div className="col-xl-10 col-lg-11 mx-auto">
-            <div className="swiper OurProduct_Slider mt-4 pt-1">
-              <div className="swiper-wrapper">
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine1</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
+                        <h3 className="KumbhSans-Bold mt-2">
+                          <span className="yellow-color">
+                            Rs. {records?.discount_price}
+                          </span>{" "}
+                          <del className="ms-3">Rs. {records?.price}</del>
+                        </h3>
+                        <div className="mt-2 text-center">
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine12</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-1">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
+            ;
           </div>
         </div>
       </section>
@@ -474,36 +337,47 @@ export default function Home() {
           <h1>Frequltly Asked Questions</h1>
           <div className="col-lg-10 mx-auto mt-md-4">
             <div className="accordion" id="accordionExample">
-              {faqs.map((records,index)=>{
-                return <div className="accordion-item" key={index}>
-                <h2 className="accordion-header" id={"heading"+index}>
-                  <button
-                    className="accordion-button"
-                    type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target={"#collapse"+index}
-                    aria-expanded="true"
-                    aria-controls={"collapse"+index}
-                  >
-                    <span className="frequltyNumber">{index+1}.</span>{records.question}
-                  </button>
-                </h2>
-                <div
-                  id={"collapse"+index}
-                  className={"accordion-collapse collapse"+ (index == 0) ? 'show' :''}
-                  aria-labelledby={"heading"+index}
-                  data-bs-parent="#accordionExample"
-                >
-                  <div className="accordion-body">
-                    <div className="row align-items-center">
-                      <div className="col-lg-12">
-                        <p className="mb-3" dangerouslySetInnerHTML={{__html: records.faq_ans}}>
-                        </p>
+              {faqs.map((records: any, index) => {
+                return (
+                  <div className="accordion-item" key={index}>
+                    <h2 className="accordion-header" id={"heading" + index}>
+                      <button
+                        className="accordion-button"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target={"#collapse" + index}
+                        aria-expanded="true"
+                        aria-controls={"collapse" + index}
+                      >
+                        <span className="frequltyNumber">{index + 1}.</span>
+                        {records.question}
+                      </button>
+                    </h2>
+                    <div
+                      id={"collapse" + index}
+                      className={
+                        "accordion-collapse collapse" + (index == 0)
+                          ? "show"
+                          : ""
+                      }
+                      aria-labelledby={"heading" + index}
+                      data-bs-parent="#accordionExample"
+                    >
+                      <div className="accordion-body">
+                        <div className="row align-items-center">
+                          <div className="col-lg-12">
+                            <p
+                              className="mb-3"
+                              dangerouslySetInnerHTML={{
+                                __html: records.faq_ans,
+                              }}
+                            ></p>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </div>
+                );
               })}
             </div>
           </div>
