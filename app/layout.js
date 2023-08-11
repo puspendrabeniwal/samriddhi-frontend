@@ -10,6 +10,7 @@ import { PrimeReactProvider } from "primereact/api";
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 //core
 import "primereact/resources/primereact.min.css";
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {

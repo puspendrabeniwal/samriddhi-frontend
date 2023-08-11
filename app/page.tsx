@@ -4,11 +4,56 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
-import Slider from "react-slick";
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+import { Carousel } from "primereact/carousel";
 
 export default function Home() {
+  const responsiveOptions = [
+    {
+      breakpoint: "1199px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "991px",
+      numVisible: 2,
+      numScroll: 1,
+    },
+    {
+      breakpoint: "767px",
+      numVisible: 1,
+      numScroll: 1,
+    },
+  ];
+  const listOfCarouselProduct = [
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+    {
+      imgUrl: "image/demoImg1.png",
+      description:
+        " It was the best tour ever! I got a lot of impressions of beautiful places and breathtaking views.",
+      name: "Liam Gordon",
+      place: "Austin, TX",
+    },
+  ];
   const [faqs, setFaqs] = useState([]);
   useEffect(() => {
     axios
@@ -17,21 +62,32 @@ export default function Home() {
         let result = response.data && response.data ? response.data : {};
         if (result) {
           let faqList = result.faqs ? result.faqs : [];
-          console.log(response.data, "faqList");
-
           setFaqs(faqList);
         }
       });
   }, []);
-  var settings = [
-    {
-      dots: true,
-      infinite: true,
-      speed: 500,
-      slidesToShow: 1,
-      slidesToScroll: 1,
-    },
-  ];
+
+  const productTemplate = (
+    carouselProduct: (typeof listOfCarouselProduct)[0]
+  ) => {
+    return (
+      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
+        <div className="mb-3">
+          <img
+            width={200}
+            className="customerUserProfile"
+            src={carouselProduct.imgUrl}
+            alt={carouselProduct.name}
+          />
+        </div>
+        <div>
+          <p className="">{carouselProduct.description}</p>
+          <h3>{carouselProduct.name}</h3>
+          <h6 className="">{carouselProduct.place}</h6>
+        </div>
+      </div>
+    );
+  };
   return (
     <main>
       <section className="HometopBg pb-5">
@@ -154,71 +210,13 @@ export default function Home() {
               Samriddhi Frames.
             </p>
           </div>
-
-          <div className="swiper mt-4 pt-1">
-            <div className="swiper-wrapper">
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/2nd-Image.png"
-                    alt=""
-                  />
-                </div>
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
-                </div>
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
-                </div>
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-              <div className="swiper-slide">
-                <div className="">
-                  <img
-                    className="customerUserProfile"
-                    src="image/demoImg1.png"
-                    alt=""
-                  />
-                </div>
-                <p className="">
-                  It was the best tour ever! I got a lot of impressions of
-                  beautiful places and breathtaking views.
-                </p>
-                <h3>Liam Gordon</h3>
-                <h6 className="">Austin, TX</h6>
-              </div>
-            </div>
-          </div>
+          <Carousel
+            value={listOfCarouselProduct}
+            numScroll={1}
+            numVisible={3}
+            responsiveOptions={responsiveOptions}
+            itemTemplate={productTemplate}
+          />
         </div>
       </section>
       <section className="marqueeNew">
