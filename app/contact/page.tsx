@@ -37,192 +37,198 @@ export default function Contact() {
     <>
       <Toast ref={toast} />
       <main>
-        <section className="p-3 p-lg-0">
-          <div className="row mx-lg-0">
-            <div className="col-lg-6 p-lg-5 py-5 contactUsSection">
-              <h6 className="KumbhSans-Regular mb-3">CONTACT US</h6>
-              <h1 className="">
-                Have Questions? <br />
-                Get in Touch!
-              </h1>
-              <Formik
-                initialValues={{
-                  name: "",
-                  city: "",
-                  phone: "",
-                  email: "",
-                  message: "",
-                }}
-                validate={(values) => {
-                  const errors: any = {};
-                  if (!values.name) {
-                    errors.name = "Name cannot be blank";
-                  }
-                  if (!values.city) {
-                    errors.city = "City cannot be blank";
-                  }
-                  if (!values.phone) {
-                    errors.phone = "Phone number cannot be blank";
-                  } else if (values.phone.length < 8) {
-                    errors.phone = "At least 8 digits are required";
-                  }
+        <section className="p-3 p-lg-0 contactUsSection">
+          <div className="container ">
+            <div className="col-lg-11 mx-auto py-5 py-lg-0">
+              <div className="row mx-0 ">
+                <div className="col-lg-7 p-lg-5 py-3 ">
+                  <h6 className="KumbhSans-Regular mb-3">CONTACT US</h6>
+                  <h1 className="">
+                    Have Questions? <br />
+                    Get in Touch!
+                  </h1>
+                  <Formik
+                    initialValues={{
+                      name: "",
+                      city: "",
+                      phone: "",
+                      email: "",
+                      message: "",
+                    }}
+                    validate={(values) => {
+                      const errors: any = {};
+                      if (!values.name) {
+                        errors.name = "Name cannot be blank";
+                      }
+                      if (!values.city) {
+                        errors.city = "City cannot be blank";
+                      }
+                      if (!values.phone) {
+                        errors.phone = "Phone number cannot be blank";
+                      } else if (values.phone.length < 8) {
+                        errors.phone = "At least 8 digits are required";
+                      }
 
-                  if (!values.message) {
-                    errors.message = "Name cannot be blank";
-                  }
+                      if (!values.message) {
+                        errors.message = "Name cannot be blank";
+                      }
 
-                  if (!values.email) {
-                    errors.email = "Email cannot be blank";
-                  } else if (
-                    !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
-                      values.email
-                    )
-                  ) {
-                    errors.email = "Invalid email address";
-                  }
-                  return errors;
-                }}
-                onSubmit={(values, helper) => {
-                  handleSubmit(values, helper);
-                }}
-              >
-                {({
-                  values,
-                  errors,
-                  touched,
-                  handleChange,
-                  handleBlur,
-                  handleSubmit,
-                  isSubmitting,
-                  setFieldValue,
-                  /* and other goodies */
-                }) => (
-                  <form onSubmit={handleSubmit}>
-                    <div className="row">
-                      <div className="col-lg-6 col-md-6">
-                        <div className="form-floating billingForm">
-                          <input
-                            type="text"
-                            name="name"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.name}
-                            className="form-control"
-                            id="floatingname"
-                            placeholder="First Name"
-                          />
-                          <label htmlFor="floatingname">
-                            Name<span className="text-danger">*</span>
-                          </label>
+                      if (!values.email) {
+                        errors.email = "Email cannot be blank";
+                      } else if (
+                        !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(
+                          values.email
+                        )
+                      ) {
+                        errors.email = "Invalid email address";
+                      }
+                      return errors;
+                    }}
+                    onSubmit={(values, helper) => {
+                      handleSubmit(values, helper);
+                    }}
+                  >
+                    {({
+                      values,
+                      errors,
+                      touched,
+                      handleChange,
+                      handleBlur,
+                      handleSubmit,
+                      isSubmitting,
+                      setFieldValue,
+                      /* and other goodies */
+                    }) => (
+                      <form onSubmit={handleSubmit}>
+                        <div className="row">
+                          <div className="col-lg-6 col-md-6">
+                            <div className="form-floating billingForm">
+                              <input
+                                type="text"
+                                name="name"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.name}
+                                className="form-control"
+                                id="floatingname"
+                                placeholder="First Name"
+                              />
+                              <label htmlFor="floatingname">
+                                Name<span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <span style={{ color: "red", fontSize: "12px" }}>
+                              {errors.name && touched.name && errors.name}
+                            </span>
+                          </div>
+                          <div className="col-lg-6 col-md-6">
+                            <div className="form-floating billingForm">
+                              <input
+                                type="email"
+                                name="email"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.email}
+                                className="form-control"
+                                placeholder="Email"
+                                id="floatingemail"
+                              />
+                              <label htmlFor="floatingemail">
+                                Email address
+                                <span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <span style={{ color: "red", fontSize: "12px" }}>
+                              {errors.email && touched.email && errors.email}
+                            </span>
+                          </div>
+                          <div className="col-lg-6 col-md-6">
+                            <div className="form-floating billingForm">
+                              <input
+                                type="text"
+                                name="phone"
+                                maxLength={12}
+                                onChange={(e) => {
+                                  const regex = /^[0-9\b]+$/;
+                                  if (
+                                    e.currentTarget.value === "" ||
+                                    regex.test(e.currentTarget.value)
+                                  ) {
+                                    setFieldValue(
+                                      "phone",
+                                      e.currentTarget.value
+                                    );
+                                  }
+                                }}
+                                onBlur={handleBlur}
+                                value={values.phone}
+                                className="form-control"
+                                placeholder="Phone Number"
+                                id="floatingNumber"
+                              />
+                              <label htmlFor="floatingNumber">
+                                Phone number
+                                <span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <span style={{ color: "red", fontSize: "12px" }}>
+                              {errors.phone && touched.phone && errors.phone}
+                            </span>
+                          </div>
+                          <div className="col-lg-6 col-md-6">
+                            <div className="form-floating billingForm">
+                              <input
+                                type="text"
+                                name="city"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.city}
+                                className="form-control"
+                                placeholder="Last Name"
+                                id="floatingcity"
+                              />
+                              <label htmlFor="floatingcity">
+                                City<span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <span style={{ color: "red", fontSize: "12px" }}>
+                              {errors.city && touched.city && errors.city}
+                            </span>
+                          </div>
+                          <div className="col-lg-12">
+                            <div className="form-floating billingForm">
+                              <textarea
+                                className="form-control"
+                                placeholder="Leave a comment here"
+                                id="floatingTextarea2"
+                                name="message"
+                                onChange={handleChange}
+                                onBlur={handleBlur}
+                                value={values.message}
+                              ></textarea>
+                              <label htmlFor="floatingTextarea2">
+                                Messege<span className="text-danger">*</span>
+                              </label>
+                            </div>
+                            <span style={{ color: "red", fontSize: "12px" }}>
+                              {errors.message &&
+                                touched.message &&
+                                errors.message}
+                            </span>
+                          </div>
                         </div>
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                          {errors.name && touched.name && errors.name}
-                        </span>
-                      </div>
-                      <div className="col-lg-6 col-md-6">
-                        <div className="form-floating billingForm">
-                          <input
-                            type="email"
-                            name="email"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.email}
-                            className="form-control"
-                            placeholder="Email"
-                            id="floatingemail"
-                          />
-                          <label htmlFor="floatingemail">
-                            Email address<span className="text-danger">*</span>
-                          </label>
-                        </div>
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                          {errors.email && touched.email && errors.email}
-                        </span>
-                      </div>
-                      <div className="col-lg-6 col-md-6">
-                        <div className="form-floating billingForm">
-                          <input
-                            type="text"
-                            name="phone"
-                            maxLength={12}
-                            onChange={(e) => {
-                              const regex = /^[0-9\b]+$/;
-                              if (
-                                e.currentTarget.value === "" ||
-                                regex.test(e.currentTarget.value)
-                              ) {
-                                setFieldValue("phone", e.currentTarget.value);
-                              }
-                            }}
-                            onBlur={handleBlur}
-                            value={values.phone}
-                            className="form-control"
-                            placeholder="Phone Number"
-                            id="floatingNumber"
-                          />
-                          <label htmlFor="floatingNumber">
-                            Phone number<span className="text-danger">*</span>
-                          </label>
-                        </div>
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                          {errors.phone && touched.phone && errors.phone}
-                        </span>
-                      </div>
-                      <div className="col-lg-6 col-md-6">
-                        <div className="form-floating billingForm">
-                          <input
-                            type="text"
-                            name="city"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.city}
-                            className="form-control"
-                            placeholder="Last Name"
-                            id="floatingcity"
-                          />
-                          <label htmlFor="floatingcity">
-                            City<span className="text-danger">*</span>
-                          </label>
-                        </div>
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                          {errors.city && touched.city && errors.city}
-                        </span>
-                      </div>
-                      <div className="col-lg-12">
-                        <div className="form-floating billingForm">
-                          <textarea
-                            className="form-control"
-                            placeholder="Leave a comment here"
-                            id="floatingTextarea2"
-                            name="message"
-                            onChange={handleChange}
-                            onBlur={handleBlur}
-                            value={values.message}
-                          ></textarea>
-                          <label htmlFor="floatingTextarea2">
-                            Messege<span className="text-danger">*</span>
-                          </label>
-                        </div>
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                          {errors.message && touched.message && errors.message}
-                        </span>
-                      </div>
-                    </div>
 
-                    <button
-                      className="btn btn-yellow px-5 mt-4"
-                      type="submit"
-                      disabled={isSubmitting}
-                    >
-                      Send
-                    </button>
-                  </form>
-                )}
-              </Formik>
-            </div>
-            <div className="col-lg-6 px-0 px-lg-0 mb-lg-0 contactUsSection">
-              <div className="map-responsive">
-                {" "}
+                        <button
+                          className="btn btn-yellow px-5 mt-4"
+                          type="submit"
+                          disabled={isSubmitting}
+                        >
+                          Send
+                        </button>
+                      </form>
+                    )}
+                  </Formik>
+                </div>
                 <div className="col-lg-5 p-lg-5">
                   <div className="mb-5 d-flex align-items-start contactAddress">
                     <img
