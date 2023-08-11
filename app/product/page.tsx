@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
+import React from "react";
 export default function Product() {
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
@@ -30,13 +31,13 @@ export default function Product() {
             <h2 className="KumbhSans-Bold">Our Product</h2>
 
             <div className="row">
-              {productsItems.map((records, index) => {
+              {productsItems.map((records: any, index) => {
                 return (
                   <div className="col-lg-4 Our_Product mt-3" key={index}>
-                    <Link href={"/productDetail/" + records._id}>
+                    <Link href={"/productDetail/" + records?._id}>
                       <div className="bg-white text-center p-3 productImg">
                         <img
-                          src={records?.full_image_path}
+                          src={records.full_image_path}
                           className=""
                           alt="product image"
                         />

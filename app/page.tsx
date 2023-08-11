@@ -7,6 +7,11 @@ import Marquee from "react-fast-marquee";
 import { Carousel } from "primereact/carousel";
 
 export default function Home() {
+  const [faqs, setFaqs] = useState([]);
+  const [productsItems, setproductsItems] = useState([]);
+  useEffect(() => {
+    getProductList();
+  }, []);
   const responsiveOptions = [
     {
       breakpoint: "1199px",
@@ -54,7 +59,6 @@ export default function Home() {
       place: "Austin, TX",
     },
   ];
-  const [faqs, setFaqs] = useState([]);
   useEffect(() => {
     axios
       .get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
@@ -87,6 +91,21 @@ export default function Home() {
         </div>
       </div>
     );
+  };
+
+  //==== Product list by api =======
+  const getProductList = async () => {
+    await axios
+      .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
+      .then(
+        (res) => {
+          const dt = res.data.result ? res.data.result : [];
+          setproductsItems(dt);
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
   };
   return (
     <main>
@@ -241,199 +260,52 @@ export default function Home() {
               guarantee, and wide range of sizes.
             </p>
           </div>
+          <div className="row">
+            {productsItems.map((records: any, index) => {
+              return (
+                <div className="col-lg-4 Our_Product mt-3" key={index}>
+                  <Link href={"/productDetail/" + records?._id}>
+                    <div className="bg-white text-center p-3 productImg">
+                      <img
+                        src={records.full_image_path}
+                        className=""
+                        alt="product image"
+                      />
+                    </div>
+                    <div className="mt-3">
+                      <div className="ps-xl-3">
+                        <h2> {records?.product_name}</h2>
 
-          <div className="col-xl-10 col-lg-11 mx-auto">
-            <div className="swiper OurProduct_Slider mt-4 pt-1">
-              <div className="swiper-wrapper">
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine1</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
+                        <h3 className="KumbhSans-Bold mt-2">
+                          <span className="yellow-color">
+                            Rs. {records?.discount_price}
+                          </span>{" "}
+                          <del className="ms-3">Rs. {records?.price}</del>
+                        </h3>
+                        <div className="mt-2 text-center">
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                          <a href="">
+                            <i className="fa fa-star ratingStar"></i>
+                          </a>
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Link>
                 </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine12</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-1">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-
-                <div className="swiper-slide Our_Product">
-                  <div className="bg-white text-center p-3 productImg">
-                    <img
-                      className=""
-                      src="https://www.transparentpng.com/download/sri-ganesh/sri-ganesh-png-transparent-images-gold-11.png"
-                      alt=""
-                    />
-                  </div>
-
-                  <div className="mt-3">
-                    <div className="ps-xl-3">
-                      <h2>Ritual Figurine</h2>
-
-                      <h3 className="KumbhSans-Bold mt-2">
-                        <span className="yellow-color">Rs. 3500.00</span>{" "}
-                        <del className="ms-3">Rs. 1800.00</del>
-                      </h3>
-                      <div className="mt-2">
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                        <a href="">
-                          <i className="fa fa-star ratingStar"></i>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+              );
+            })}
+            ;
           </div>
         </div>
       </section>
@@ -468,7 +340,7 @@ export default function Home() {
           <h1>Frequltly Asked Questions</h1>
           <div className="col-lg-10 mx-auto mt-md-4">
             <div className="accordion" id="accordionExample">
-              {faqs.map((records, index) => {
+              {faqs.map((records: any, index) => {
                 return (
                   <div className="accordion-item" key={index}>
                     <h2 className="accordion-header" id={"heading" + index}>
