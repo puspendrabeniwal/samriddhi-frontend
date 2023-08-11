@@ -42,7 +42,7 @@ Navigation Menu
 .modal{z-index: 33335}
 .logo-top{height: 60px;}
 .headerNav {height: 70px;z-index: 999;transition: all 0.9s;display: flex;align-items: center;}
-.navbarScroll{position: sticky;z-index: 999;top: 0px;background-color: var(--yellowLightColor);}
+.navbarScroll{position: sticky;z-index: 2222;top: 0px;background-color: var(--yellowLightColor);}
 .fixedHeader{background-color: var(--yellowLightColor);box-shadow: 0px 0px 5px rgba(127, 137, 161, 0.3);}
 /*-------------------------------------------------------------- # 
 maintop sliders
@@ -62,7 +62,7 @@ maintop sliders
 .HometopBg{ min-height: 400px; background-position: center; background-size: cover; } 
 .HometopBg h1{ font-size: 58px; font-family: KumbhSans-Bold; }
 .HometopBg p{ font-size: 17px; font-family: KumbhSans-Medium;color: var(--grayColor); margin-top: 20px;} 
-.HometopBg img{height: 350px;object-fit: cover;border-radius: 30px;}
+.HometopBg img{height: 350px;object-fit: cover; border-radius: 5px;}
 .HometopBg{
     background-image: url("../image/HometopBg.png");
 }
@@ -77,6 +77,7 @@ maintop sliders
 .PrayersTemple{ background-color: #fff; } 
 .PrayersTemple h1{ font-size: 33px; font-family: KumbhSans-Bold;margin-bottom: 20px; } 
 .PrayersTemple p{ font-size: 16px; font-family: KumbhSans-Medium;color: var(--grayColor); margin-top: 10px;  }
+.PrayersTemple img{border-radius : 5px;}
 
 .youtubeModal .Modal_btn-close{position: absolute; right: -23px; background: var(--yellowColor); color: white; opacity: 1; top: -13px; border-radius: 50%; display: flex; align-items: center; justify-content: center; height: 20px; width: 20px; z-index: 1;}
 .youtubeModal .Modal_btn-close:hover{background-color: var(--NavyBlueColor);color: white;}
@@ -84,6 +85,7 @@ maintop sliders
 
 /* ---------- BenefitsSection start--------- */
 .BenefitsSection{ background-color: var(--yellowLightColor);padding: 50px 0px; } 
+.BenefitsSection img{ border-radius: 5px; } 
 .BenefitsSection h1{ font-size: 35px; font-family: KumbhSans-Bold; color: #000;padding-bottom: 30px; } 
 .benefits_CardM{ border-right: 1px solid #D9D9D9;} 
 .BenefitsSection .benefitsCard{ padding: 25px 25px 25px 0px; display: flex; align-items: center; position: relative; border-top: 1px solid #D9D9D9}
@@ -253,7 +255,6 @@ maintop sliders
 .contactAddress img{ width: 48px; } 
 .contactAddress h6{ font-size: 15px; margin-top: 8px; font-family: Gilroy-Light; line-height: 20px; } 
 .contactAddress h5{ font-size: 19px; font-family: Gilroy-Bold; }
-
 
 
 .our-mission-panel h2{

@@ -229,7 +229,7 @@ export default function Home() {
           <Carousel
             value={listOfCarouselProduct}
             numScroll={1}
-            numVisible={3}
+            numVisible={2}
             responsiveOptions={responsiveOptions}
             itemTemplate={productTemplate}
           />
@@ -238,12 +238,9 @@ export default function Home() {
       <section className="marqueeNew">
         <Marquee scroll-amount="22">
           <ul className="">
-            <li>
-              Explore Our Smart Business Cards{" "}
-              <img src="image/play-com.png" alt="" />
-            </li>
-            <li>Explore Our Smart Business Cards</li>
-            <li>Explore Our Smart Business Cards</li>
+            <li>Welcome Prosperity into your life! </li>
+            <li>Welcome Prosperity into your life! </li>
+            <li>Welcome Prosperity into your life! </li>
           </ul>
         </Marquee>
       </section>

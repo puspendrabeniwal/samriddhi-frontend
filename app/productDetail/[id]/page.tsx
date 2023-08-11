@@ -129,17 +129,8 @@ export default function Product({ params }: { params: { id: string } }) {
                   {productDetail?.description}
                 </p>
 
-                <input
-                  type="number"
-                  className="countNumber form-control mt-4"
-                />
-
                 <div className="mt-4 pt-2">
-                  <button className="btn btn-white me-3 px-3">
-                    <i className="fa fa-user-o me-1" aria-hidden="true"></i>
-                    Add to cart
-                  </button>
-                  <button className="btn btn-yellow">Buy Now</button>
+                  <Link href={`/checkout/${params.id}`} className="btn btn-yellow">Buy Now</Link>
                 </div>
               </div>
             </div>
