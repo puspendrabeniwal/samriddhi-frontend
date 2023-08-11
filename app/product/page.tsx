@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import Link from "next/link";
 import React from "react";
+import { AppConstants } from "../constants/constants";
 export default function Product() {
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
@@ -11,17 +12,15 @@ export default function Product() {
   }, []);
   //==== Product list by api =======
   const getProductList = async () => {
-    await axios
-      .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
-      .then(
-        (res) => {
-          const dt = res.data.result ? res.data.result : [];
-          setproductsItems(dt);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
+      (res) => {
+        const dt = res.data.result ? res.data.result : [];
+        setproductsItems(dt);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
   return (
     <main>
@@ -75,7 +74,6 @@ export default function Product() {
                   </div>
                 );
               })}
-              ;
             </div>
           </div>
         </div>

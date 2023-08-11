@@ -5,6 +5,7 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import { Carousel } from "primereact/carousel";
+import { AppConstants } from "./constants/constants";
 
 export default function Home() {
   const [faqs, setFaqs] = useState([]);
@@ -60,15 +61,13 @@ export default function Home() {
     },
   ];
   useEffect(() => {
-    axios
-      .get(`https://samriddhi-frame-z0nw.onrender.com/api/home_data`)
-      .then((response) => {
-        let result = response.data && response.data ? response.data : {};
-        if (result) {
-          let faqList = result.faqs ? result.faqs : [];
-          setFaqs(faqList);
-        }
-      });
+    axios.get(`${AppConstants.Api_BaseUrl}/home_data`).then((response) => {
+      let result = response.data && response.data ? response.data : {};
+      if (result) {
+        let faqList = result.faqs ? result.faqs : [];
+        setFaqs(faqList);
+      }
+    });
   }, []);
 
   const productTemplate = (
@@ -95,17 +94,15 @@ export default function Home() {
 
   //==== Product list by api =======
   const getProductList = async () => {
-    await axios
-      .get("https://samriddhi-frame-z0nw.onrender.com/api/products")
-      .then(
-        (res) => {
-          const dt = res.data.result ? res.data.result : [];
-          setproductsItems(dt);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+    await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
+      (res) => {
+        const dt = res.data.result ? res.data.result : [];
+        setproductsItems(dt);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
   };
   return (
     <main>

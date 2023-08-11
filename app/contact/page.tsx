@@ -3,6 +3,7 @@ import React, { useRef } from "react";
 import axios from "axios";
 import { Formik, FormikHelpers, FormikValues, useFormik } from "formik";
 import { Toast } from "primereact/toast";
+import { AppConstants } from "../constants/constants";
 
 export default function Contact() {
   const toast = useRef(null);
@@ -13,7 +14,7 @@ export default function Contact() {
     helper.setSubmitting(true);
     try {
       const response = await axios.post(
-        "https://samriddhi-frame-z0nw.onrender.com/api/contact_us",
+        `${AppConstants.Api_BaseUrl}/contact_us`,
         values
       );
       helper.setSubmitting(false);
