@@ -115,7 +115,7 @@ export default function Contact() {
                                 placeholder="First Name"
                               />
                               <label htmlFor="floatingname">
-                                Name<span className="text-danger">*</span>
+                                Full Name<span className="text-danger">*</span>
                               </label>
                             </div>
                             <span style={{ color: "red", fontSize: "12px" }}>
@@ -135,7 +135,7 @@ export default function Contact() {
                                 id="floatingemail"
                               />
                               <label htmlFor="floatingemail">
-                                Email address
+                                Email
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
@@ -168,7 +168,7 @@ export default function Contact() {
                                 id="floatingNumber"
                               />
                               <label htmlFor="floatingNumber">
-                                Phone number
+                                Phone Number
                                 <span className="text-danger">*</span>
                               </label>
                             </div>
@@ -208,7 +208,7 @@ export default function Contact() {
                                 value={values.message}
                               ></textarea>
                               <label htmlFor="floatingTextarea2">
-                                Messege<span className="text-danger">*</span>
+                                Message<span className="text-danger">*</span>
                               </label>
                             </div>
                             <span style={{ color: "red", fontSize: "12px" }}>

@@ -21,7 +21,7 @@ export default function Home() {
     },
     {
       breakpoint: "991px",
-      numVisible: 2,
+      numVisible: 1,
       numScroll: 1,
     },
     {
@@ -74,24 +74,20 @@ export default function Home() {
     carouselProduct: (typeof listOfCarouselProduct)[0]
   ) => {
     return (
-      <div className="border-1 surface-border border-round m-2 text-center py-5 px-3">
-        <div className="mb-3">
+      <div>
+        <div>
           <img
-            width={200}
             className="customerUserProfile"
             src={carouselProduct.imgUrl}
             alt={carouselProduct.name}
           />
         </div>
-        <div>
-          <p className="">{carouselProduct.description}</p>
-          <h3>{carouselProduct.name}</h3>
-          <h6 className="">{carouselProduct.place}</h6>
-        </div>
+        <p className="">{carouselProduct.description}</p>
+        <h3>{carouselProduct.name}</h3>
+        <h6 className="">{carouselProduct.place}</h6>
       </div>
     );
   };
-
   //==== Product list by api =======
   const getProductList = async () => {
     await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
@@ -104,6 +100,7 @@ export default function Home() {
       }
     );
   };
+
   return (
     <main>
       <section className="HometopBg pb-5">
@@ -218,7 +215,7 @@ export default function Home() {
       <section className="userAreSaying defaultPaddingTB">
         <div className="container">
           <div className="CustomersSayingText text-center">
-            <h1>What Our Customers Saying</h1>
+            <h1>What Our Customers Are Saying</h1>
             <p>
               Discover the profound impact of spiritual frames and join the many
               satisfied customers who have found spiritual solace and
@@ -226,13 +223,97 @@ export default function Home() {
               Samriddhi Frames.
             </p>
           </div>
-          <Carousel
-            value={listOfCarouselProduct}
-            numScroll={1}
-            numVisible={2}
-            responsiveOptions={responsiveOptions}
-            itemTemplate={productTemplate}
-          />
+          <div className="swiper CustomersSaying mt-4 pt-1 swiper-initialized swiper-horizontal swiper-backface-hidden">
+            <div
+              className="swiper-wrapper"
+              id="swiper-wrapper-a90709a9d15bf462"
+              aria-live="off"
+            >
+              <div
+                className="swiper-slide swiper-slide-active"
+                role="group"
+                data-swiper-slide-index="0"
+                style={{ width: "256.5px", marginRight: "40px" }}
+              >
+                <div>
+                  <img
+                    className="customerUserProfile"
+                    src=" image/demoImg1.png"
+                    alt=""
+                  />
+                </div>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Aranab J</h3>
+                {/* <Carousel
+                  value={listOfCarouselProduct}
+                  numScroll={1}
+                  numVisible={2}
+                  responsiveOptions={responsiveOptions}
+                  itemTemplate={productTemplate}
+                /> */}
+              </div>
+              <div
+                className="swiper-slide swiper-slide-active"
+                role="group"
+                data-swiper-slide-index="0"
+                style={{ width: "256.5px", marginRight: "40px" }}
+              >
+                <div>
+                  <img
+                    className="customerUserProfile"
+                    src=" image/demoImg1.png"
+                    alt=""
+                  />
+                </div>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Aranab J</h3>
+              </div>
+              <div
+                className="swiper-slide swiper-slide-active"
+                role="group"
+                data-swiper-slide-index="0"
+                style={{ width: "256.5px", marginRight: "40px" }}
+              >
+                <div>
+                  <img
+                    className="customerUserProfile"
+                    src=" image/demoImg1.png"
+                    alt=""
+                  />
+                </div>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Aranab J</h3>
+              </div>
+              <div
+                className="swiper-slide swiper-slide-active"
+                role="group"
+                data-swiper-slide-index="0"
+                style={{ width: "256.5px", marginRight: "40px" }}
+              >
+                <div>
+                  <img
+                    className="customerUserProfile"
+                    src=" image/demoImg1.png"
+                    alt=""
+                  />
+                </div>
+                <p className="">
+                  It was the best tour ever! I got a lot of impressions of
+                  beautiful places and breathtaking views.
+                </p>
+                <h3>Aranab J</h3>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
       <section className="marqueeNew">
@@ -353,9 +434,9 @@ export default function Home() {
                     <div
                       id={"collapse" + index}
                       className={
-                        "accordion-collapse collapse" + (index == 0)
-                          ? "show"
-                          : ""
+                        index === 0
+                          ? "accordion-collapse collapse  show"
+                          : "accordion-collapse collapse"
                       }
                       aria-labelledby={"heading" + index}
                       data-bs-parent="#accordionExample"
