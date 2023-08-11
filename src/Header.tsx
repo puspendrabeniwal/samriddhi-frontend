@@ -5,7 +5,7 @@ export function Header() {
       <div className="container d-flex align-items-center justify-content-between">
         <div className="">
           <Link className="p-0 d-flex align-items-center" href="/">
-            <img className="logo-top" src="image/Logo.png" />
+            <img className="logo-top" src="/image/Logo.png" />
           </Link>
         </div>
         <button

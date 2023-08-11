@@ -6,7 +6,7 @@ export default function Footer() {
            <div className="row footerSection defaultPaddingTB">
               <div className="col-xl-5 col-lg-6">
                  <a className="p-0 d-inline-block" href="index.html">
-                    <img className="logo-top mb-3" src="image/Logo.png" />
+                    <img className="logo-top mb-3" src="/image/Logo.png" />
                  </a>
                  <p className="mb-3">Samridhi Frames empower you to embark on a journey of prosperity and growth. These exquisite frames serve as constant reminders of your limitless potential, igniting the spark of confidence within you. All rights reserved. J2D FASHIONS PRIVATE LIMITED
                  </p>

@@ -2,8 +2,9 @@
 import React from 'react';
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { Formik, FormikHelpers, FormikValues } from "formik";
 
+import { Formik, FormikHelpers, FormikValues } from "formik";
+import { AppConstants } from "../../constants/constants";
 
 export default function Checkout({ params  }: { params : { id: string } }) {
   let productKeys = {
@@ -20,28 +21,33 @@ export default function Checkout({ params  }: { params : { id: string } }) {
   }, []);
 
 
-
+  /** Save order request */
   async function handleSubmit(
     values: FormikValues,
     helper: FormikHelpers<FormikValues>
   ) {
     helper.setSubmitting(true);
     try {
-      const response = await axios.post(
-        "https://samriddhi-frame-z0nw.onrender.com/api/contact_us",
-        values
-      );
+      values["price"] = productDetail.discount_price
+      values["product_id"] = params.id
+      const response = await axios.post(`${AppConstants.Api_BaseUrl}/checkout/${params.id}`,values);
+      console.log("response sfdsfdsfds", response.data.result)
       helper.setSubmitting(false);
-      helper.resetForm();
+      if(response.data && response.data.result){
+        window.location.replace(response.data.result.longurl);
+      }
+      //helper.resetForm();
+      //if(response && response.result)
     } catch (error) {
       helper.setSubmitting(false);
       console.log(error);
     }
   }
 
+  /** Get porduct detail */
   const getProductDetail = async () => {
     await axios
-      .get("https://samriddhi-frame-z0nw.onrender.com/api/product/"+params.id)
+      .get(`${AppConstants.Api_BaseUrl}/product/${params.id}`)
       .then(
         (res) => {
           let productDeta = (res.data.result) ? res.data.result : {};
@@ -154,16 +160,16 @@ export default function Checkout({ params  }: { params : { id: string } }) {
                                     <div className="col-lg-6">
                                         <div className="form-floating billingForm">
                                             <input 
-                                                type="email"
-                                                name="emial"
+                                                type="text"
+                                                name="email"
                                                 onChange={handleChange}
                                                 onBlur={handleBlur}
                                                 value={values.email}
                                                 className="form-control" 
-                                                id="emial" 
+                                                id="email" 
                                                 placeholder="" 
                                             />
-                                            <label htmlFor="emial">Email address<span className="text-danger">*</span></label>
+                                            <label htmlFor="email">Email address<span className="text-danger">*</span></label>
                                         </div>
                                         <span style={{ color: "red", fontSize: "12px" }}>
                                             {errors.email && touched.email && errors.email}
