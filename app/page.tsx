@@ -215,7 +215,7 @@ export default function Home() {
       <section className="userAreSaying defaultPaddingTB">
         <div className="container">
           <div className="CustomersSayingText text-center">
-            <h1>What Our Customers Saying</h1>
+            <h1>What Our Customers Are Saying</h1>
             <p>
               Discover the profound impact of spiritual frames and join the many
               satisfied customers who have found spiritual solace and
