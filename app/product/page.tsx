@@ -1,5 +1,5 @@
 "use client";
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Link from "next/link";
 
@@ -7,7 +7,7 @@ import { AppConstants } from "../constants/constants";
 export default function Product() {
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
-    getProductList()
+    getProductList();
   }, []);
 
   //==== Product list by api =======

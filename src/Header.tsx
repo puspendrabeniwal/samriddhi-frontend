@@ -1,4 +1,5 @@
 import Link from "next/link";
+import React from "react";
 export function Header() {
   return (
     <header id="header" className="navbarScroll w-100 headerNav headerTop">
@@ -53,6 +54,11 @@ export function Header() {
             <li className="">
               <Link className="scrollLink" href="/contact">
                 Contact
+              </Link>
+            </li>
+            <li className="">
+              <Link className="scrollLink" href="/productStatic">
+                Product Static
               </Link>
             </li>
           </ul>

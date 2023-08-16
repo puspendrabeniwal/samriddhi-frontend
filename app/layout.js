@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import "./globals.css";
 import { Metadata } from "next";
 import Script from "next/script";
@@ -6,6 +6,7 @@ import { Inter } from "next/font/google";
 import { Header } from "../src/Header";
 import Footer from "../src/Footer";
 import { PrimeReactProvider } from "primereact/api";
+import "primeicons/primeicons.css";
 //theme
 import "primereact/resources/themes/lara-light-indigo/theme.css";
 //core
@@ -29,14 +30,21 @@ export default function RootLayout({ children }) {
         />
         <meta name="keywords" />
         <title>Home</title>
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+        <link
+          rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
+        />
         <link rel="icon" href="/img/rkInputIcon.png" />
         <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css" />
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <link rel="stylesheet" type="text/css" href="/css/common.css" />
         <link rel="stylesheet" type="text/css" href="/css/responsive.css" />
         <link rel="stylesheet" href="/css/animate.css" />
-        <link rel="stylesheet" type="text/css" href="/css/swiper-bundle.min.css"></link>
+        <link
+          rel="stylesheet"
+          type="text/css"
+          href="/css/swiper-bundle.min.css"
+        ></link>
       </head>
       <body className={inter.className}>
         <PrimeReactProvider>
@@ -46,13 +54,41 @@ export default function RootLayout({ children }) {
         </PrimeReactProvider>
       </body>
 
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/jquery.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/bootstrap.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/particles.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/swiper-bundle.min.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/custom.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/mobile-nav.js"></Script>
-      <Script id="scriptAfterInteractive" type="text/javascript" src="/js/wow.js"></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/jquery.min.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/bootstrap.min.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/particles.min.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/swiper-bundle.min.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/custom.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/mobile-nav.js"
+      ></Script>
+      <Script
+        id="scriptAfterInteractive"
+        type="text/javascript"
+        src="/js/wow.js"
+      ></Script>
     </html>
   );
 }
