@@ -52,6 +52,9 @@ export default function Footer() {
                     <Link href="/productStatic">Product Static</Link>
                   </li>
                   <li>
+                    <Link href="/blogs">Blogs</Link>
+                  </li>
+                  <li>
                     <Link href="/privacy">Privacy Policy</Link>
                   </li>
                   <li>

@@ -56,9 +56,14 @@ export function Header() {
                 Contact
               </Link>
             </li>
-            <li className="">
+            {/* <li className="">
               <Link className="scrollLink" href="/productStatic">
                 Product Static
+              </Link>
+            </li> */}
+            <li className="">
+              <Link className="scrollLink" href="/blogs">
+                Blogs
               </Link>
             </li>
           </ul>
