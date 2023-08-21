@@ -1,9 +1,8 @@
 "use client";
 import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
-import { AppConstants } from "../../constants/constants";
+import axiosInstance from "../../apiData/page";
 export default function Blogs({ params }: { params: { id: string } }) {
   let productKeys = {
     full_image_path: "",
@@ -19,15 +18,13 @@ export default function Blogs({ params }: { params: { id: string } }) {
   }, []);
 
   const getProductDetail = async () => {
-    await axios.get(`${AppConstants.Api_BaseUrl}/product/` + params.id).then(
-      (res) => {
-        let productDeta = res.data.result ? res.data.result : {};
-        setProductDetail(productDeta);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    try {
+      const response = await axiosInstance.get(`/product/` + params.id);
+      let productDeta = response.data.result ? response.data.result : {};
+      setProductDetail(productDeta);
+    } catch (error) {
+      // Handle the error
+    }
   };
   return (
     <main>

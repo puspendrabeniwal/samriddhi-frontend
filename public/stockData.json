@@ -1,5 +1,6 @@
 [
   {
+    "id": "1234567891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -11,6 +12,7 @@
     "timeElapsed": "5 sec ago"
   },
   {
+    "id": "234567891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -22,6 +24,7 @@
     "timeElapsed": "10 sec ago"
   },
   {
+    "id": "134567891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -33,6 +36,7 @@
     "timeElapsed": "3 sec ago"
   },
   {
+    "id": "124567891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -44,6 +48,7 @@
     "timeElapsed": "4 sec ago"
   },
   {
+    "id": "123567891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -55,6 +60,7 @@
     "timeElapsed": "10 sec ago"
   },
   {
+    "id": "123467891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -66,6 +72,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123457891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -77,6 +84,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456891011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -88,6 +96,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456791011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -99,6 +108,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456781011121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -110,6 +120,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456789111121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -121,6 +132,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -132,6 +144,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -143,6 +156,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111214151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -154,6 +168,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111213151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -165,6 +180,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111213141617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -176,6 +192,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111213141517",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -187,6 +204,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456789101112131415161",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -198,6 +216,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910121314151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -209,6 +228,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456789101114151617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -220,6 +240,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456789101112131617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -231,6 +252,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "123456789101112131415",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -242,6 +264,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "1234567891011121314",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",
@@ -253,6 +276,7 @@
     "timeElapsed": "12 sec ago"
   },
   {
+    "id": "12345678910111617",
     "imgUrl": "image/demoImg1.png",
     "inventoryStatus": "stock",
     "category": "clothing",

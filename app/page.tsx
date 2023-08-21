@@ -1,17 +1,17 @@
 "use client"; // This is a client component
 import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
 import Link from "next/link";
 import Marquee from "react-fast-marquee";
 import { Carousel } from "primereact/carousel";
-import { AppConstants } from "./constants/constants";
+import axiosInstance from "./apiData/page";
 
 export default function Home() {
   const [faqs, setFaqs] = useState([]);
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
     getProductList();
+    getHomeData();
   }, []);
   const responsiveOptions = [
     {
@@ -60,15 +60,29 @@ export default function Home() {
       place: "Austin, TX",
     },
   ];
-  useEffect(() => {
-    axios.get(`${AppConstants.Api_BaseUrl}/home_data`).then((response) => {
+  //======================= home list data by api =====================
+  const getHomeData = async () => {
+    try {
+      const response = await axiosInstance.get("/home_data");
       let result = response.data && response.data ? response.data : {};
       if (result) {
         let faqList = result.faqs ? result.faqs : [];
         setFaqs(faqList);
       }
-    });
-  }, []);
+    } catch (error) {
+      // Handle the error
+    }
+  };
+  //======================= Product list data by api =====================
+  const getProductList = async () => {
+    try {
+      const response = await axiosInstance.get("/products");
+      const data = response.data.result ? response.data.result : [];
+      setproductsItems(data);
+    } catch (error) {
+      // Handle the error
+    }
+  };
 
   const productTemplate = (
     carouselProduct: (typeof listOfCarouselProduct)[0]
@@ -86,18 +100,6 @@ export default function Home() {
         <h3>{carouselProduct.name}</h3>
         <h6 className="">{carouselProduct.place}</h6>
       </div>
-    );
-  };
-  //==== Product list by api =======
-  const getProductList = async () => {
-    await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
-      (res) => {
-        const dt = res.data.result ? res.data.result : [];
-        setproductsItems(dt);
-      },
-      (err) => {
-        console.log(err);
-      }
     );
   };
 

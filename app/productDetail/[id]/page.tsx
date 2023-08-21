@@ -1,9 +1,9 @@
 "use client";
-import React from 'react';
+import React from "react";
 import { useEffect, useState } from "react";
-import axios from "axios";
 import Link from "next/link";
-import { AppConstants } from "../../constants/constants";
+import axiosInstance from "../../apiData/page";
+
 export default function Product({ params }: { params: { id: string } }) {
   let productKeys = {
     full_image_path: "",
@@ -19,18 +19,28 @@ export default function Product({ params }: { params: { id: string } }) {
   }, []);
 
   const getProductDetail = async () => {
-    await axios.get(`${AppConstants.Api_BaseUrl}/product/` + params.id).then(
-      (res) => {
-        let productDeta = res.data.result ? res.data.result : {};
-        console.log(params.id, res.data.result);
-
-        setProductDetail(productDeta);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    try {
+      const response = await axiosInstance.get(`/product/` + params.id);
+      let productDeta = response.data.result ? response.data.result : {};
+      setProductDetail(productDeta);
+    } catch (error) {
+      // Handle the error
+    }
   };
+
+  // const getProductDetail = async () => {
+  //   await axios.get(`${AppConstants.Api_BaseUrl}/product/` + params.id).then(
+  //     (res) => {
+  //       let productDeta = res.data.result ? res.data.result : {};
+  //       console.log(params.id, res.data.result);
+
+  //       setProductDetail(productDeta);
+  //     },
+  //     (err) => {
+  //       console.log(err);
+  //     }
+  //   );
+  // };
   return (
     <main>
       <section className="defaultPaddingTB bg-lightYellow">
@@ -130,7 +140,12 @@ export default function Product({ params }: { params: { id: string } }) {
                 </p>
 
                 <div className="mt-4 pt-2">
-                  <Link href={`/checkout/${params.id}`} className="btn btn-yellow">Buy Now</Link>
+                  <Link
+                    href={`/checkout/${params.id}`}
+                    className="btn btn-yellow"
+                  >
+                    Buy Now
+                  </Link>
                 </div>
               </div>
             </div>

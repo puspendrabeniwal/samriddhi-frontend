@@ -3,19 +3,27 @@ import React from "react";
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { AppConstants } from "../constants/constants";
+import axiosInstance from "../apiData/page";
 export default function Cancellation() {
   const [page, setPage] = useState("");
+
   useEffect(() => {
-    axios
-      .get(`${AppConstants.Api_BaseUrl}/cms/cancellation-and-refund-policy`)
-      .then((response) => {
-        let result =
-          response.data && response.data.result ? response.data.result : {};
-        if (result) {
-          setPage(result.body);
-        }
-      });
+    getPrivacyPolicyList();
   }, []);
+  const getPrivacyPolicyList = async () => {
+    try {
+      const response = await axiosInstance.get(
+        "/cms/cancellation-and-refund-policy"
+      );
+      let result =
+        response.data && response.data.result ? response.data.result : {};
+      if (result) {
+        setPage(result.body);
+      }
+    } catch (error) {
+      // Handle the error
+    }
+  };
 
   return (
     <div className="container">

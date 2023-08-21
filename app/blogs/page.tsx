@@ -1,9 +1,7 @@
 "use client";
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import Link from "next/link";
-
-import { AppConstants } from "../constants/constants";
+import axiosInstance from "../apiData/page";
 export default function Blogs() {
   const [productsItems, setproductsItems] = useState([]);
   useEffect(() => {
@@ -12,15 +10,13 @@ export default function Blogs() {
 
   //==== Product list by api =======
   const getProductList = async () => {
-    await axios.get(`${AppConstants.Api_BaseUrl}/products`).then(
-      (res) => {
-        const dt = res.data.result ? res.data.result : [];
-        setproductsItems(dt);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    try {
+      const response = await axiosInstance.get("/products");
+      const data = response.data.result ? response.data.result : [];
+      setproductsItems(data);
+    } catch (error) {
+      // Handle the error
+    }
   };
   return (
     <main>

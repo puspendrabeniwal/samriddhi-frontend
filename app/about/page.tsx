@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { AppConstants } from "../constants/constants";
+import axiosInstance from "../apiData/page";
 export default function About() {
   const [aboutData, setAboutData] = useState({});
   const [loaderData, setLoaderData] = useState(true);
@@ -10,25 +11,17 @@ export default function About() {
   }, []);
   //==== about page list by api =======
   const getAboutBlock = async () => {
-    setLoaderData(true);
     try {
-      await axios.get(`${AppConstants.Api_BaseUrl}/block/about-us`).then(
-        (res) => {
-          const data = res.data.result;
-          setAboutData(data);
-          setLoaderData(false);
-        },
-        (err) => {
-          console.log(err);
-          setLoaderData(false);
-        }
-      );
-    } catch (e) {
-      console.log(e);
+      const response = await axiosInstance.get("/block/about-us");
+      const data = response.data.result;
+
+      setAboutData(data);
       setLoaderData(false);
+    } catch (error) {
+      // Handle the error
     }
   };
-  console.log("aboutData", aboutData);
+
   return (
     <main>
       <div className="aboutusBanner">
@@ -179,7 +172,6 @@ export default function About() {
             </div>
           </section>
           {/*---------------- Contact Us ------------------*/}
-
           <section className="contactUsBottom">
             <div className="container">
               <div className="col-lg-10 text-center mx-auto position-relative">

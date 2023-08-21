@@ -2,68 +2,100 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { InputText } from "primereact/inputtext";
 import axios from "axios";
-import { slice } from "lodash";
+export type StockDataListType = {
+  id: string;
+  imgUrl: string;
+  inventoryStatus: string;
+  category: string;
+  company: string;
+  description: string;
+  stockPrice: string;
+  quality: string;
+  contentLevel: string;
+  timeElapsed: string;
+};
 export default function ProductStatic() {
-  const [inputValue, setInputValue] = useState("");
-  const [stockDataList, setStockDataList] = useState([]);
-  const [hasMoreItems, setHasMoreItems] = useState(false);
-  const [cardItem, setCardItem] = useState([]);
+  const [stockDataList, setStockDataList] = useState<
+    StockDataListType[] | null
+  >(null);
+  const [stockSlicedDataList, setStockSlicedDataList] = useState<
+    StockDataListType[] | null
+  >(null);
   const [count, setCount] = useState(6);
-  const initialPosts = slice(cardItem, 0, count);
-  const [searchInput, setSearchInput] = useState("");
-  const [inputForm, setInputForm] = useState("");
+  const [hasMoreItems, setHasMoreItems] = useState(false);
+  const [searchInputValue, setSearchInputValue] = useState("");
 
   const getStockData = useCallback(async () => {
     const response = await axios.get("./stockData.json");
-
-    console.log(" response.data.data", response.data);
-    const dt = response.data;
-    setStockDataList(dt);
-    setCardItem(dt);
-    console.log("dt", dt.length);
-  }, []);
-  let inputHandler = (e: any) => {
-    //convert input text to lower case
-    var lowerCase = e.target.value.toLowerCase();
-    console.log(lowerCase);
-    const searchResult = stockDataList.filter(
-      (item) => item.company.toLowerCase() == lowerCase
-    );
-    setCardItem(searchResult);
-
-    setInputValue(lowerCase);
-  };
-  useEffect(() => {
-    getStockData();
-  }, [searchInput]);
-
-  const loadMore = () => {
-    setCount(count + 6);
-    if (count >= stockDataList.length) {
+    const stockDataResponse = response.data as StockDataListType[];
+    setStockDataList(stockDataResponse);
+    setStockSlicedDataList(stockDataResponse.slice(0, count));
+    if (stockDataResponse.length > count) {
       setHasMoreItems(true);
     } else {
       setHasMoreItems(false);
     }
-  };
-  // ============ Search parameter formik validation  ===========//
-  const onSubmitsearchJob = useCallback((e) => {
-    e.preventDefault();
-    if (e.target.value) {
-      setSearchInput(e.target.value);
+  }, [count]);
+
+  useEffect(() => {
+    getStockData();
+  }, [count]);
+
+  const handleScrollToLoadMore = (ev: Event) => {
+    if (
+      window.innerHeight + Math.ceil(document.documentElement.scrollTop) + 2 >=
+        document.scrollingElement.scrollHeight &&
+      hasMoreItems
+    ) {
+      setHasMoreItems(false);
+      setCount(count + 6);
     }
-  }, []);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => handleScrollToLoadMore(e));
+    return () => {
+      window.removeEventListener("scroll", handleScrollToLoadMore);
+    };
+  }, [hasMoreItems]);
+
+  const handleSearchDebounce = (searchInput: string) => {
+    if (searchInput === "" && stockDataList) {
+      setCount(6);
+      setStockSlicedDataList(stockDataList.slice(0, 6));
+    }
+    const searchResult = stockDataList?.filter((item) =>
+      item?.company?.toLowerCase().includes(searchInput.toLowerCase())
+    );
+    if (searchResult) {
+      setStockSlicedDataList(searchResult.slice(0, count));
+      if (searchResult.length > count) {
+        setHasMoreItems(true);
+      } else {
+        setHasMoreItems(false);
+      }
+    }
+  };
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
-      setSearchInput(inputForm);
-    }, 900);
+      handleSearchDebounce(searchInputValue);
+    }, 400);
 
     return () => clearTimeout(delayDebounceFn);
-  }, [inputForm]);
+  }, [searchInputValue]);
+
+  // ============ Search parameter formik validation  ===========//
+  // const onSubmitsearchJob = useCallback((e) => {
+  //   e.preventDefault();
+  //   if (e.target.value) {
+  //     setSearchInput(e.target.value);
+  //   }
+  // }, []);
 
   const ProductStructure = ({
     listProduct,
   }: {
-    listProduct: (typeof initialPosts)[0];
+    listProduct: StockDataListType;
   }) => {
     return (
       <div className="col-sm-12 col-md-4 col-lg-4 ">
@@ -102,66 +134,6 @@ export default function ProductStatic() {
     );
   };
 
-  const [searching, setSearching] = useState("");
-  // return (
-  //   <main>
-  //     {/*=========================== Search Input Field and Search Button ==========================*/}
-  //     <form>
-  //       <div className="search-div">
-  //         <span className="p-input-icon-left">
-  //           <i className="pi pi-search" />
-  //           <InputText
-  //             // value={inputValue}
-  //             // onChange={inputHandler}
-  //             placeholder="Search"
-  //             className="input-width"
-  //             onChange={(e) => {
-  //               setSearching(e.target.value);
-  //             }}
-  //           />
-  //         </span>
-  //       </div>
-  //     </form>
-
-  //     <section>
-  //       <div className="row">
-  //         {initialPosts
-  //           .filter((val: any) => {
-  //             if (searching === "") {
-  //               return val;
-  //             } else if (
-  //               val.company.toLowerCase().includes(searching.toLowerCase())
-  //             ) {
-  //               return val;
-  //             }
-  //           })
-  //           .map((stockItem: any, key: any) => {
-  //             return (
-  //               <div className="row">
-  //                 <ProductStructure listProduct={stockItem} key={key} />
-  //               </div>
-  //             );
-  //           })}
-  //       </div>
-  //     </section>
-  //     <div className=" d-flex justify-content-center mb-3">
-  //       {hasMoreItems ? (
-  //         <button
-  //           onClick={loadMore}
-  //           type="button"
-  //           className="btn btn-danger disabled"
-  //         >
-  //           That's It
-  //         </button>
-  //       ) : (
-  //         <button onClick={loadMore} type="button" className="btn btn-danger">
-  //           Load More +
-  //         </button>
-  //       )}
-  //     </div>
-  //   </main>
-  // );
-
   return (
     <main>
       {/*=========================== Search Input Field and Search Button ==========================*/}
@@ -170,40 +142,28 @@ export default function ProductStatic() {
           <span className="p-input-icon-left">
             <i className="pi pi-search" />
             <InputText
-              value={inputValue}
-              onChange={inputHandler}
+              value={searchInputValue}
+              // onChange={inputHandler}
               placeholder="Search"
               className="input-width"
-              // onChange={(e) => {
-              //   setInputValue(e.currentTarget.value);
-              // }}
+              onChange={(e) => {
+                setCount(6);
+                setSearchInputValue(e.currentTarget.value);
+              }}
             />
           </span>
         </div>
       </form>
 
       <section>
-        <div className="row">
-          {initialPosts.map((stockItem: any, key: any) => (
-            <ProductStructure listProduct={stockItem} key={key} />
-          ))}
-        </div>
+        {stockSlicedDataList && stockSlicedDataList.length ? (
+          <div className="row">
+            {stockSlicedDataList.map((stockItem) => (
+              <ProductStructure listProduct={stockItem} key={stockItem.id} />
+            ))}
+          </div>
+        ) : null}
       </section>
-      <div className=" d-flex justify-content-center mb-3">
-        {hasMoreItems ? (
-          <button
-            onClick={loadMore}
-            type="button"
-            className="btn btn-danger disabled"
-          >
-            That's It
-          </button>
-        ) : (
-          <button onClick={loadMore} type="button" className="btn btn-danger">
-            Load More +
-          </button>
-        )}
-      </div>
     </main>
   );
 }

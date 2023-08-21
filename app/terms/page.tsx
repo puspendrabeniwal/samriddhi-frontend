@@ -1,21 +1,25 @@
 "use client"; // This is a client component
 import React from "react";
-import axios from "axios";
 import { useState, useEffect } from "react";
-import { AppConstants } from "../constants/constants";
+import axiosInstance from "../apiData/page";
 export default function Terms() {
   const [page, setPage] = useState("");
+
   useEffect(() => {
-    axios
-      .get(`${AppConstants.Api_BaseUrl}/cms/terms-and-conditions`)
-      .then((response) => {
-        let result =
-          response.data && response.data.result ? response.data.result : {};
-        if (result) {
-          setPage(result.body);
-        }
-      });
+    getTermCondition();
   }, []);
+  const getTermCondition = async () => {
+    try {
+      const response = await axiosInstance.get("/cms/terms-and-conditions");
+      let result =
+        response.data && response.data.result ? response.data.result : {};
+      if (result) {
+        setPage(result.body);
+      }
+    } catch (error) {
+      // Handle the error
+    }
+  };
 
   return (
     <div className="container">
